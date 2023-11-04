@@ -7,15 +7,32 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    margin: 20px 0;
+    margin: 20px 350px;
 }
 
 .shop-card {
     border: 1px solid #ddd;
     padding: 10px;
     margin: 10px;
-    width: 200px;
+    width: 180px;
     text-align: center;
+    background-color: var(--background-color);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    transition: transform 0.2s;
+}
+
+.shop-card:hover {
+    transform: scale(1.05);
+}
+
+.some-text h4 {
+    font-weight: 500;
+}
+
+.some-text h1 {
+    font-size: 44px;
+    color: var(--secondary-color);
 }
 
 .most-sellers {
@@ -42,13 +59,97 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    margin: 20px 0;
+    margin: 20px 400px;
 }
 
 .product-card {
     border: 1px solid #ddd;
     padding: 10px;
     margin: 10px;
-    width: 200px;
+    width: 180px;
     text-align: center;
+    background-color: var(--background-color);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    transition: transform 0.2s;
+}
+
+.product-card:hover {
+    transform: scale(1.05);
+}
+
+.feature-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    overflow-x: auto;
+    background-color: #fff;
+    padding: 5px 5px 0 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 25px;
+    padding: 5px;
+}
+
+.container-fluid {
+    background-color: #323639;
+    color: white;
+    padding: 15px;
+    margin: 0 30px;
+}
+
+.newsletter-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.newsletter-text {
+    flex: 1;
+    /* Takes up available space */
+    padding-right: 20px;
+    /* Add spacing between text and input area */
+}
+
+.newsletter-text h4 {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.newsletter-input {
+    flex: 1;
+    /* Takes up available space */
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.input-group input {
+    flex: 1;
+    /* Takes up available space */
+    height: 40px;
+    border: none;
+    border-bottom: 1px solid white;
+    /* Example border for input */
+    background-color: transparent;
+    color: white;
+}
+
+.input-group-append button {
+    height: 40px;
+    width: 94px;
+    border: none;
+    background-color: var(--secondary-color);
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    transition: filter 0.3s;
+}
+
+.input-group-append button:hover {
+    filter: brightness(50%);
 }

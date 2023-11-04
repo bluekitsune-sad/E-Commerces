@@ -7,6 +7,8 @@ import {
   faChevronUp,
   faChevronDown,
   faSearch,
+  faSignInAlt,
+  faUserAlt,
 } from "@fortawesome/free-solid-svg-icons";
 
 const Header = () => {
@@ -37,56 +39,68 @@ const Header = () => {
   };
 
   return (
-    <header className="header">
-      <div className="logo">
-        <img src={logo} alt="Logo" />
-      </div>
-
-      <div className="category-dropdown" onMouseLeave={closeCategory}>
-        <button className="category-button" onClick={toggleCategory}>
-          Browse Categories
-          <FontAwesomeIcon
-            icon={isCategoryOpen ? faChevronUp : faChevronDown}
-          />
+    <div className="header-container">
+      <div className="top-bar">
+        <button className="top-bar-button">
+          <FontAwesomeIcon icon={faSignInAlt} />
+          Shop-Login/Register
         </button>
-        {isCategoryOpen && (
-          <ul className="category-menu">
-            {categories.map((category, index) => (
-              <li key={index}>
-                <a href={`/${category.toLowerCase()}`}>{category}</a>
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
-
-      <div className="search-bar">
-        <input type="text" placeholder="Search..." />
-        <button>
-          <FontAwesomeIcon icon={faSearch} />
+        <button className="top-bar-button">
+          <FontAwesomeIcon icon={faUserAlt} />
+          Customer-Login/Register
         </button>
       </div>
 
-      <div
-        className="cart-icon"
-        onMouseEnter={toggleCart}
-        onMouseLeave={toggleCart}
-      >
-        <FontAwesomeIcon icon={faShoppingCart} />
-        {isCartOpen && (
-          <div className="cart-dropdown">
-            <ul>
-              {cartItems.map((item) => (
-                <li key={item.id}>
-                  {item.name} - ${item.price}
+      <header className="header">
+        <div className="logo">
+          <img src={logo} alt="Logo" />
+        </div>
+
+        <div className="category-dropdown" onMouseLeave={closeCategory}>
+          <button className="category-button" onClick={toggleCategory}>
+            Browse Categories
+            <FontAwesomeIcon
+              icon={isCategoryOpen ? faChevronUp : faChevronDown}
+            />
+          </button>
+          {isCategoryOpen && (
+            <ul className="category-menu">
+              {categories.map((category, index) => (
+                <li key={index}>
+                  <a href={`/${category.toLowerCase()}`}>{category}</a>
                 </li>
               ))}
             </ul>
-            <button>Go to Cart</button>
-          </div>
-        )}
-      </div>
-    </header>
+          )}
+        </div>
+        <div className="home">
+          <a href="#">Home</a>
+        </div>
+
+        <div className="search-bar">
+          <input type="text" placeholder="Search..." />
+          <button>
+            <FontAwesomeIcon icon={faSearch} />
+          </button>
+        </div>
+
+        <div className="cart-icon" onMouseEnter={toggleCart}>
+          <FontAwesomeIcon icon={faShoppingCart} />
+          {isCartOpen && (
+            <div className="cart-dropdown" onMouseLeave={toggleCart}>
+              <ul>
+                {cartItems.map((item) => (
+                  <li key={item.id}>
+                    {item.name} - ${item.price}
+                  </li>
+                ))}
+              </ul>
+              <button>Go to Cart</button>
+            </div>
+          )}
+        </div>
+      </header>
+    </div>
   );
 };
 
