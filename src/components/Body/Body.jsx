@@ -5,6 +5,8 @@ import MostSellers from "./mostSeller";
 import Product from "./Product";
 import "./Body.css";
 import FeatureItem from "./FeatureItem";
+import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
 
 function Body() {
   // Dummy data for shops, most sellers, and products
@@ -89,82 +91,88 @@ function Body() {
   ];
 
   return (
-    <div className="body-container">
-      <SlidingImages />
-      <div className="feature-bar">
-        <FeatureItem
-          iconName="faIdCard"
-          title="Free Membership for shops"
-          description=""
-        />
-        <FeatureItem
-          iconName="faCreditCard"
-          title="POS Facility for shops"
-          description=""
-        />
-        <FeatureItem
-          iconName="faCreditCard"
-          title="Connectivity in just one click"
-          description=""
-        />
-        <FeatureItem
-          iconName="faMoneyCheckAlt"
-          title="24/7 Support"
-          description=""
-        />
-      </div>
-      <div className="some-text">
-        <h4>VIEW ALL SHOPS</h4>
-        <h1>Dukan24h Shop</h1>
-      </div>
-      <h2>Shops</h2>
-      <div className="shops-container">
-        {shops.map((shop) => (
-          <Shop key={shop.id} {...shop} />
-        ))}
-      </div>
-      {/* <MostSellers sellers={mostSellers} /> */}
-      <div className="container-fluid">
-        <div className="row newsletter-row">
-          <div className="newsletter-text">
-            <h4 className="text-white">Subscribe Our Newsletter!</h4>
-            <p className="text-white">
-              Subscribe to our newsletter for featured promotions and new
-              products!
-            </p>
-          </div>
-          <div className="newsletter-input">
-            <form>
-              <div className="input-group">
-                <input
-                  className="form-control"
-                  type="email"
-                  placeholder="Enter Your Email Address"
-                  required
-                />
-                <div className="input-group-append">
-                  <button className="subscribe-button" type="submit">
-                    SUBSCRIBE
-                  </button>
+    <>
+      <Header />
+
+      <div className="body-container">
+        <SlidingImages />
+        <div className="feature-bar">
+          <FeatureItem
+            iconName="faIdCard"
+            title="Free Membership for shops"
+            description=""
+          />
+          <FeatureItem
+            iconName="faCreditCard"
+            title="POS Facility for shops"
+            description=""
+          />
+          <FeatureItem
+            iconName="faCreditCard"
+            title="Connectivity in just one click"
+            description=""
+          />
+          <FeatureItem
+            iconName="faMoneyCheckAlt"
+            title="24/7 Support"
+            description=""
+          />
+        </div>
+        <div className="some-text">
+          <h4>VIEW ALL SHOPS</h4>
+          <h1>Dukan24h Shop</h1>
+        </div>
+        <h2>Shops</h2>
+        <div className="shops-container">
+          {shops.map((shop) => (
+            <Shop key={shop.id} {...shop} />
+          ))}
+        </div>
+        {/* <MostSellers sellers={mostSellers} /> */}
+        <div className="container-fluid">
+          <div className="row newsletter-row">
+            <div className="newsletter-text">
+              <h4 className="text-white">Subscribe Our Newsletter!</h4>
+              <p className="text-white">
+                Subscribe to our newsletter for featured promotions and new
+                products!
+              </p>
+            </div>
+            <div className="newsletter-input">
+              <form>
+                <div className="input-group">
+                  <input
+                    className="form-control"
+                    type="email"
+                    placeholder="Enter Your Email Address"
+                    required
+                  />
+                  <div className="input-group-append">
+                    <button className="subscribe-button" type="submit">
+                      SUBSCRIBE
+                    </button>
+                  </div>
                 </div>
-              </div>
-            </form>
+              </form>
+            </div>
           </div>
         </div>
+        <h2>Latest Products</h2>
+        <div className="products-container">
+          {products.map((product) => (
+            <Product key={product.id} {...product} />
+          ))}
+        </div>
+        <h2>Featured Products</h2>
+        <div className="products-container">
+          {products.map((product) => (
+            <Product key={product.id} {...product} />
+          ))}
+        </div>
       </div>
-      <h2>Latest Products</h2>
-      <div className="products-container">
-        {products.map((product) => (
-          <Product key={product.id} {...product} />
-        ))}
-      </div>
-      <h2>Featured Products</h2>
-      <div className="products-container">
-        {products.map((product) => (
-          <Product key={product.id} {...product} />
-        ))}
-      </div>
-    </div>
+
+      <Footer />
+    </>
   );
 }
 

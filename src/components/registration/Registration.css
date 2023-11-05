@@ -3,13 +3,13 @@
     border: 1px solid red;
 }
 
-/* 
-body {
+
+.container {
     background-image: url('https://dukan24h.com/public/d24h/userend/assets/images/banners/register.gif');
     background-repeat: no-repeat;
     padding: 2rem;
     background-size: cover;
-} */
+}
 
 .chosen-container-single .chosen-single div b {
     display: block;

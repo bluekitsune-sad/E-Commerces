@@ -10,10 +10,10 @@ import {
   faSignInAlt,
   faUserAlt,
 } from "@fortawesome/free-solid-svg-icons";
+import { businessCategories } from "../Constants/Constant";
 
 const Header = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const [isCategoryOpen, setIsCategoryOpen] = useState(false);
 
   // Dummy data for cart items
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -36,8 +36,8 @@ const Header = () => {
     setIsDropdownOpen(false);
   };
 
-  const filteredItems = items.filter((item) =>
-    item.name.toLowerCase().includes(searchValue.toLowerCase())
+  const filteredItems = businessCategories.filter((item) =>
+    item.label.toLowerCase().includes(searchValue.toLowerCase())
   );
 
   const cartItems = [
@@ -86,14 +86,14 @@ const Header = () => {
                   value={searchValue}
                   onChange={(e) => setSearchValue(e.target.value)}
                 />
-                <ul>
+                <ul className="scrollable-list">
                   {filteredItems.map((item) => (
                     <li
-                      key={item.id}
+                      key={item.value}
                       onMouseEnter={() => setSelectedItem(item)}
                       onClick={() => handleItemClick(item)}
                     >
-                      {item.name}
+                      {item.label}
                     </li>
                   ))}
                 </ul>

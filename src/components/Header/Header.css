@@ -67,6 +67,11 @@
     position: relative;
 }
 
+.scrollable-list {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
 .dropdown-button-container .dropdown-button {
     background: var(--secondary-color);
     padding: 10px 20px;
@@ -124,7 +129,7 @@
     top: 0;
     right: -837px;
     width: 816px;
-    height: 152px;
+    height: 227px;
     background-color: var(--background-color);
     padding: 10px;
     z-index: 2;
