@@ -21,7 +21,7 @@ function App() {
           <circle cx={170} cy={170} r={85} stroke="#666" />
         </svg>
       </div> */}
-      <Body />
+      {/* <Body /> */}
       <RegistrationForm />
       {/* <extra /> */}
     </div>
