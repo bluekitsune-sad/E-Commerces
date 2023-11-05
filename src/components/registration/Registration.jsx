@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "./Registration.css";
 import { businessCategories, countryOptions } from "../Constants/Constant";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
 function RegistrationForm() {
   const [formData, setFormData] = useState({
@@ -45,7 +47,7 @@ function RegistrationForm() {
   return (
     <div className="container">
       <a href="https://dukan24h.com" className="back">
-        <i className="bi bi-arrow-left" />
+        <FontAwesomeIcon icon={faArrowLeft} />
       </a>
       <form
         id="addPharmacy"
@@ -62,7 +64,7 @@ function RegistrationForm() {
               paddingBottom: "0px !important",
             }}
           >
-            <h3 style={{ color: "white" }}>Shop Information</h3>
+            <h3>Shop Information</h3>
             <hr />
             <div className="row m-2">
               <div className="form-group">
@@ -137,19 +139,10 @@ function RegistrationForm() {
                       id="product_image"
                       accept="image/*"
                       onChange={handleImageChange}
-                      style={{ border: "1px solid lightgray" }}
                     />
                   </div>
                   <div className="col-lg-4">
-                    <img
-                      id="Shop_logo"
-                      style={{
-                        width: "40px",
-                        height: "40px",
-                        borderRadius: "20px",
-                        border: "1px solid white",
-                      }}
-                    />
+                    <img id="Shop_logo" />
                   </div>
                 </div>
               </div>
@@ -179,112 +172,94 @@ function RegistrationForm() {
               </div>
             </div>
           </div>
-          <div
-            className="col-md-6 p-4"
-            style={{
-              backgroundColor: "#ffffffcf",
-              paddingBottom: "0px !important",
-            }}
-          >
-            <h3>Personal Information</h3>
-            <hr />
-            <div className="row m-2">
-              <div className="form-group">
+          <h3>Personal Information</h3>
+          <hr />
+          <div className="row m-2">
+            <div className="form-group">
+              <div className="name-section">
+                <input
+                  type="hidden"
+                  name="_token"
+                  defaultValue="rUBDtb9zIqsa2xs5XaifXSNFTRKvYqDtJOWmIiWh"
+                />
+                <input
+                  type="text"
+                  name="owner_fullname"
+                  placeholder="Owner’s name"
+                  value={formData.owner_fullname}
+                  onChange={handleChange}
+                  className="form-control"
+                />
+              </div>
+            </div>
+            {/* Rest of the fields */}
+            <div className="col-6">
+              <div className="email-section">
                 <div className="col-lg-12">
                   <input
-                    type="hidden"
-                    name="_token"
-                    defaultValue="rUBDtb9zIqsa2xs5XaifXSNFTRKvYqDtJOWmIiWh"
-                  />
-                  <input
-                    type="text"
-                    name="owner_fullname"
-                    placeholder="Owner’s name"
-                    value={formData.owner_fullname}
+                    type="email"
+                    name="owner_email"
+                    placeholder="Owner’s Email"
+                    value={formData.owner_email}
                     onChange={handleChange}
                     className="form-control"
                   />
                 </div>
               </div>
-              {/* Rest of the fields */}
-              <div className="col-6">
-                <div className="form-group row">
-                  <div className="col-lg-12">
-                    <input
-                      type="email"
-                      name="owner_email"
-                      placeholder="Owner’s Email"
-                      value={formData.owner_email}
-                      onChange={handleChange}
-                      className="form-control"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="col-6">
-                <div className="form-group row">
-                  <div className="col-lg-12">
-                    <input
-                      type="number"
-                      name="owner_phone"
-                      placeholder="Owner’s Phone"
-                      value={formData.owner_phone}
-                      onChange={handleChange}
-                      className="form-control"
-                      autoComplete="off"
-                    />
-                  </div>
-                </div>
-              </div>
+            </div>
+            <div className="col-6">
               <div className="form-group row">
-                <div className="col-lg-12">
+                <div className="phone-section">
                   <input
                     type="number"
-                    name="owner_cnic"
-                    placeholder="Owner’s CNIC No"
-                    value={formData.owner_cnic}
+                    name="owner_phone"
+                    placeholder="Owner’s Phone"
+                    value={formData.owner_phone}
                     onChange={handleChange}
                     className="form-control"
                     autoComplete="off"
                   />
                 </div>
               </div>
-              <div className="col-xl-12">
-                <div className="form-group row">
-                  <label className="col-lg-3 col-form-label">
-                    Owner's Image
-                  </label>
-                  <div className="col-lg-7">
-                    <input
-                      type="file"
-                      name="owner_image"
-                      id="owner_image"
-                      accept="image/*"
-                      onChange={handleImageChange}
-                      style={{ border: "1px solid lightgray" }}
-                    />
-                  </div>
-                  <div className="col-lg-2">
-                    <img
-                      id="output_owner_image"
-                      style={{
-                        width: "40px",
-                        height: "40px",
-                        borderRadius: "20px",
-                        border: "1px solid grey",
-                      }}
-                    />
-                  </div>
+            </div>
+            <div className="form-group row">
+              <div className="cnic-section">
+                <input
+                  type="number"
+                  name="owner_cnic"
+                  placeholder="Owner’s CNIC No"
+                  value={formData.owner_cnic}
+                  onChange={handleChange}
+                  className="form-control"
+                  autoComplete="off"
+                />
+              </div>
+            </div>
+            <div className="imgSection">
+              <div className="form-group row">
+                <label className="form-label">Owner's Image</label>
+                <div className="image-handleDiv">
+                  <input
+                    type="file"
+                    name="owner_image"
+                    id="owner_image"
+                    accept="image/*"
+                    onChange={handleImageChange}
+                    style={{ border: "1px solid lightgray" }}
+                  />
+                </div>
+                <div className="img-section">
+                  <img id="output_owner_image" />
                 </div>
               </div>
             </div>
-            <hr />
-            <div className="row m-2">
-              <div className="text-center">
-                <button type="submit" className="btn btn-primary">
-                  Submit
-                </button>
-              </div>
+          </div>
+          <hr />
+          <div className="submit-btn">
+            <div className="text-center">
+              <button type="submit" className="btn btn-primary">
+                Submit
+              </button>
             </div>
           </div>
         </div>
