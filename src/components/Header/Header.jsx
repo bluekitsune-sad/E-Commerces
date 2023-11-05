@@ -16,28 +16,39 @@ const Header = () => {
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
 
   // Dummy data for cart items
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
+  const [selectedItem, setSelectedItem] = useState(null);
+
+  const items = [
+    { id: 1, name: "Item 1", description: "Description for Item 1" },
+    { id: 2, name: "Item 2", description: "Description for Item 2" },
+    { id: 3, name: "Item 3", description: "Description for Item 3" },
+    // Add more items with descriptions
+  ];
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  const handleItemClick = (item) => {
+    setSelectedItem(item);
+    setIsDropdownOpen(false);
+  };
+
+  const filteredItems = items.filter((item) =>
+    item.name.toLowerCase().includes(searchValue.toLowerCase())
+  );
+
   const cartItems = [
     { id: 1, name: "Product 1", price: 10 },
     { id: 2, name: "Product 2", price: 15 },
     { id: 3, name: "Product 3", price: 20 },
   ];
 
-  const categories = ["Category 1", "Category 2", "Category 3"];
-
   const toggleCart = () => {
     setIsCartOpen(!isCartOpen);
   };
-
-  const toggleCategory = () => {
-    setIsCategoryOpen(!isCategoryOpen);
-  };
-
-  const closeCategory = () => {
-    setTimeout(() => {
-      setIsCategoryOpen(false);
-    }, 1000);
-  };
-
   return (
     <div className="header-container">
       <div className="top-bar">
@@ -56,22 +67,46 @@ const Header = () => {
           <img src={logo} alt="Logo" />
         </div>
 
-        <div className="category-dropdown" onMouseLeave={closeCategory}>
-          <button className="category-button" onClick={toggleCategory}>
-            Browse Categories
-            <FontAwesomeIcon
-              icon={isCategoryOpen ? faChevronUp : faChevronDown}
-            />
-          </button>
-          {isCategoryOpen && (
-            <ul className="category-menu">
-              {categories.map((category, index) => (
-                <li key={index}>
-                  <a href={`/${category.toLowerCase()}`}>{category}</a>
-                </li>
-              ))}
-            </ul>
-          )}
+        <div className="dropdown-button-container">
+          <div className="dropdown-container">
+            <button
+              className={`dropdown-button${isDropdownOpen ? " open" : ""}`}
+              onClick={toggleDropdown}
+            >
+              Browse Categories
+              <FontAwesomeIcon
+                icon={isDropdownOpen ? faChevronUp : faChevronDown}
+              />
+            </button>
+            {isDropdownOpen && (
+              <div className="dropdown-menu">
+                <input
+                  type="text"
+                  placeholder="Search..."
+                  value={searchValue}
+                  onChange={(e) => setSearchValue(e.target.value)}
+                />
+                <ul>
+                  {filteredItems.map((item) => (
+                    <li
+                      key={item.id}
+                      onMouseEnter={() => setSelectedItem(item)}
+                      onClick={() => handleItemClick(item)}
+                    >
+                      {item.name}
+                    </li>
+                  ))}
+                </ul>
+                {selectedItem && (
+                  <div
+                    className={`description ${selectedItem ? "active" : ""}`}
+                  >
+                    <p>{selectedItem.description}</p>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
         </div>
         <div className="home">
           <a href="#">Home</a>

@@ -14,7 +14,7 @@
 }
 
 /* Category dropdown button style */
-.category-dropdown {
+/* .category-dropdown {
     position: relative;
 }
 
@@ -33,7 +33,7 @@
 }
 
 /* Category menu style */
-.category-menu {
+/*.category-menu {
     list-style: none;
     padding: 0;
     position: absolute;
@@ -59,8 +59,86 @@
 }
 
 /* Show the category menu when the button is clicked */
-.category-dropdown:hover .category-menu {
+/*.category-dropdown:hover .category-menu {
     display: block;
+} */
+
+.dropdown-button-container .dropdown-container {
+    position: relative;
+}
+
+.dropdown-button-container .dropdown-button {
+    background: var(--secondary-color);
+    padding: 10px 20px;
+    font-size: 16px;
+    letter-spacing: 0.05em;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.dropdown-button-container .dropdown-button svg {
+    padding-left: 5px;
+}
+
+.dropdown-button-container .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    color: #333;
+    background: var(--background-color);
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 200px;
+    z-index: 1;
+}
+
+.dropdown-button-container input[type="text"] {
+    width: 90%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.dropdown-button-container ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.dropdown-button-container ul li {
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.dropdown-button-container ul li:hover {
+    background-color: var(--secondary-color);
+    filter: saturate(80%);
+}
+
+.dropdown-button-container .description {
+    position: absolute;
+    top: 0;
+    right: -837px;
+    width: 816px;
+    height: 152px;
+    background-color: var(--background-color);
+    padding: 10px;
+    z-index: 2;
+    /* display: none; */
+}
+
+/* .dropdown-button-container .description.active {
+    display: block;
+} */
+
+.dropdown-button-container .dropdown-container .dropdown-button.open {
+    letter-spacing: 0.08em;
+    color: var(--secondary-color);
+    background-color: transparent;
 }
 
 /* Search bar and cart icon styles */
