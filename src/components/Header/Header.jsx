@@ -11,7 +11,7 @@ import {
   faUserAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import { businessCategories } from "../Constants/Constant";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Header = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -20,6 +20,7 @@ const Header = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const [selectedItem, setSelectedItem] = useState(null);
+  const navigate = useNavigate();
 
   const items = [
     { id: 1, name: "Item 1", description: "Description for Item 1" },
@@ -33,6 +34,7 @@ const Header = () => {
   };
 
   const handleItemClick = (item) => {
+    navigate(`/category/${item.value}`);
     setSelectedItem(item);
     setIsDropdownOpen(false);
   };
@@ -82,10 +84,10 @@ const Header = () => {
               </li>
             ))}
           </ul>
-          <Link to="/view-cart">
+          <Link to="/cartPage">
             <button>View Cart</button>
           </Link>
-          <Link to="/checkout">
+          <Link to="/checkoutPage">
             <button>Checkout</button>
           </Link>
         </div>
@@ -112,9 +114,10 @@ const Header = () => {
 
       <header className="header">
         <div className="logo">
-          <img src={logo} alt="Logo" />
+          <Link to="/">
+            <img src={logo} alt="Logo" />
+          </Link>
         </div>
-
         <div className="dropdown-button-container">
           <div className="dropdown-container">
             <button
@@ -136,13 +139,16 @@ const Header = () => {
                 />
                 <ul className="scrollable-list">
                   {filteredItems.map((item) => (
-                    <li
+                    <Link
                       key={item.value}
+                      to={`/category/${item.value}`}
                       onMouseEnter={() => setSelectedItem(item)}
                       onClick={() => handleItemClick(item)}
+                      className="category-link"
                     >
                       {item.label}
-                    </li>
+                      <hr />
+                    </Link>
                   ))}
                 </ul>
                 {selectedItem && (
@@ -157,16 +163,18 @@ const Header = () => {
           </div>
         </div>
         <div className="home">
-          <a href="#">Home</a>
+          <Link to="/">Home</Link>
         </div>
 
         <div className="search-bar">
           <input type="text" placeholder="Search..." />
-          <button>
-            <FontAwesomeIcon icon={faSearch} />
-          </button>
-        </div>
 
+          <Link to="/searchResultPage">
+            <button>
+              <FontAwesomeIcon icon={faSearch} /> {/* //need attention */}
+            </button>
+          </Link>
+        </div>
         {cartIcon}
       </header>
     </div>
