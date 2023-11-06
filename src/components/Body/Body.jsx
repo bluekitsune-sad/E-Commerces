@@ -5,8 +5,6 @@ import MostSellers from "./mostSeller";
 import Product from "./Product";
 import "./Body.css";
 import FeatureItem from "./FeatureItem";
-import Header from "../Header/Header";
-import Footer from "../Footer/Footer";
 
 function Body() {
   // Dummy data for shops, most sellers, and products
@@ -92,8 +90,6 @@ function Body() {
 
   return (
     <>
-      <Header />
-
       <div className="body-container">
         <SlidingImages />
         <div className="feature-bar">
@@ -170,8 +166,6 @@ function Body() {
           ))}
         </div>
       </div>
-
-      <Footer />
     </>
   );
 }

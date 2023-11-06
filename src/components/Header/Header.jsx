@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Header.css";
 import logo from "../images/dukan_logo.PNG";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,10 +11,11 @@ import {
   faUserAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import { businessCategories } from "../Constants/Constant";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
-
+  const [cartItems, setCartItems] = useState([]);
   // Dummy data for cart items
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
@@ -36,30 +37,77 @@ const Header = () => {
     setIsDropdownOpen(false);
   };
 
+  const removeFromCart = (item) => {
+    const updatedCart = cartItems.filter((cartItem) => cartItem.id !== item.id);
+    setCartItems(updatedCart);
+  };
+
   const filteredItems = businessCategories.filter((item) =>
     item.label.toLowerCase().includes(searchValue.toLowerCase())
   );
 
-  const cartItems = [
-    { id: 1, name: "Product 1", price: 10 },
-    { id: 2, name: "Product 2", price: 15 },
-    { id: 3, name: "Product 3", price: 20 },
-  ];
+  const addToCart = (item) => {
+    setCartItems([...cartItems, item]);
+  };
+  useEffect(() => {
+    // Add default cart items when the component loads
+    setCartItems([
+      { id: 1, name: "Product 1", price: 10 },
+      { id: 2, name: "Product 2", price: 15 },
+      { id: 3, name: "Product 3", price: 20 },
+    ]);
+  }, []);
 
   const toggleCart = () => {
     setIsCartOpen(!isCartOpen);
   };
+
+  const cartIcon = (
+    <div className="cart-icon" onClick={toggleCart}>
+      <FontAwesomeIcon icon={faShoppingCart} />
+      {cartItems.length > 0 && (
+        <div className="cart-badge">{cartItems.length}</div>
+      )}
+      {isCartOpen && (
+        <div
+          className="cart-dropdown"
+          onClick={(e) => e.stopPropagation()}
+          onMouseLeave={toggleCart}
+        >
+          <ul>
+            {cartItems.map((item) => (
+              <li key={item.id}>
+                {item.name} - ${item.price}
+                <button onClick={() => removeFromCart(item)}>Remove</button>
+              </li>
+            ))}
+          </ul>
+          <Link to="/view-cart">
+            <button>View Cart</button>
+          </Link>
+          <Link to="/checkout">
+            <button>Checkout</button>
+          </Link>
+        </div>
+      )}
+    </div>
+  );
+
   return (
     <div className="header-container">
       <div className="top-bar">
-        <button className="top-bar-button">
+        <Link to="/registration" className="top-bar-button">
           <FontAwesomeIcon icon={faSignInAlt} />
           Shop-Login/Register
-        </button>
-        <button className="top-bar-button">
+        </Link>
+        <Link to="/registration" className="top-bar-button">
           <FontAwesomeIcon icon={faUserAlt} />
           Customer-Login/Register
-        </button>
+        </Link>
+        {/* <button className="top-bar-button">
+          <FontAwesomeIcon icon={faUserAlt} />
+          Customer-Login/Register
+        </button> */}
       </div>
 
       <header className="header">
@@ -119,21 +167,7 @@ const Header = () => {
           </button>
         </div>
 
-        <div className="cart-icon" onMouseEnter={toggleCart}>
-          <FontAwesomeIcon icon={faShoppingCart} />
-          {isCartOpen && (
-            <div className="cart-dropdown" onMouseLeave={toggleCart}>
-              <ul>
-                {cartItems.map((item) => (
-                  <li key={item.id}>
-                    {item.name} - ${item.price}
-                  </li>
-                ))}
-              </ul>
-              <button>Go to Cart</button>
-            </div>
-          )}
-        </div>
+        {cartIcon}
       </header>
     </div>
   );

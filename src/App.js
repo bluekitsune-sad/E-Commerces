@@ -1,9 +1,9 @@
 import React from "react";
 import "./App.css";
-import extra from "./extra";
 import Header from "./components/Header/Header";
 import Body from "./components/Body/Body";
 import Footer from "./components/Footer/Footer";
+import Routes from "./components/Routes/Route";
 import RegistrationForm from "./components/registration/Registration";
 
 function App() {
@@ -21,9 +21,13 @@ function App() {
           <circle cx={170} cy={170} r={85} stroke="#666" />
         </svg>
       </div> */}
-      {/* <Body /> */}
-      <RegistrationForm />
-      {/* <extra /> */}
+      {/* <Header />
+      <Body />
+      <Footer /> */}
+      {/* <RegistrationForm /> */}
+      <div>
+        <Routes />
+      </div>
     </div>
   );
 }
