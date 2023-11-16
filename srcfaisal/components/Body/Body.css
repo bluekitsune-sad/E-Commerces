@@ -107,7 +107,9 @@
 
 .newsletter-text {
     flex: 1;
+    /* Takes up available space */
     padding-right: 20px;
+    /* Add spacing between text and input area */
 }
 
 .newsletter-text h4 {
@@ -117,6 +119,7 @@
 
 .newsletter-input {
     flex: 1;
+    /* Takes up available space */
 }
 
 .input-group {
@@ -127,9 +130,11 @@
 
 .input-group input {
     flex: 1;
+    /* Takes up available space */
     height: 40px;
     border: none;
     border-bottom: 1px solid white;
+    /* Example border for input */
     background-color: transparent;
     color: white;
 }

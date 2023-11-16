@@ -74,7 +74,7 @@ function RegistrationForm() {
         <FontAwesomeIcon icon={faArrowLeft} />
       </Link>
 
-      <form
+      <form style={{border:'1px solid red', marginTop:'450px'}}
         id="addPharmacy"
         action="https://dukan24h.com/pos/pharmacyRegistrationProcess" //need attention
         method="POST"
@@ -299,7 +299,8 @@ function RegistrationForm() {
               </div>
             </div>
           </div>
-
+          <hr />
+          <hr />
           <div className="col-md-6 p-4">
             <h3>Personal Information</h3>
             <hr />

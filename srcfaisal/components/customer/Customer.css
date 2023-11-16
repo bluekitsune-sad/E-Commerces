@@ -17,7 +17,7 @@
     padding: 10px;
     color: white;
     transition: 0.3s ease-in;
-    border-radius: 50%;
+    border-radius: 1000%;
 }
 
 .back:hover {
@@ -31,31 +31,36 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    background-image: url('https://dukan24h.com/public/d24h/userend/assets/images/banners/register.gif');
+    
+    
     background-repeat: no-repeat;
     background-size: cover;
     overflow-y: auto;
-    padding: 5rem;
+    
+
 }
+
 
 .form-container {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
 }
 
 #addPharmacy {
     background-color: #9bd7e0;
-    /* width: 70%;*/
-    max-width: 500px;
-    border-radius: 10px;
-    padding: 15px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
-    /* margin-top: 20px; */
 }
+
+.container form {
+    width: 50%;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    margin-right: 20px;
+}
+
+/* hr {
+    margin-top: 5px;
+} */
 
 .container h3 {
     color: #333;
@@ -65,23 +70,15 @@
     text-align: center;
 }
 
-.form-group.row {
-    margin: 10px 15px;
+.form-group {
+    /* margin-bottom: 20px; */
 }
 
-
-.form-control {
-    padding: 0 5px;
-}
-
-.form-container input[type="text"],
-.form-container input[type="email"],
-.form-container input[type="number"],
-.form-container input[type="file"],
-.form-container select,
-.form-container button {
-    width: 80%;
-    max-width: 400px;
+.container input[type="text"],
+.container input[type="email"],
+.container input[type="number"],
+.container input[type="file"] {
+    width: 50%;
     padding: 12px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
@@ -92,69 +89,57 @@
     background-color: #f9f9f9;
 }
 
-.container input[type="password"],
-.container input[type="email"],
-.container input[type="number"] {
-    width: 100%;
+.container input[type="text"]:focus,
+.container input[type="email"]:focus,
+.container input[type="number"]:focus,
+.container input[type="file"]:focus {
+    border: 1px solid var(--secondary-color);
+    background-color: #fff;
+}
+
+.container input[type="password"] {
+    width: 50%;
+    padding: 12px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    outline: none;
+    transition: border 0.3s;
+    background-color: #f9f9f9;
+}
+
+.container input[type="password"]:focus {
+    border: 1px solid var(--secondary-color);
+    background-color: #fff;
 }
 
 .container select {
-    width: 90%;
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    outline: none;
+    transition: border 0.3s;
+    background-color: #f9f9f9;
 }
 
-#pharmacy_country select {
-    padding-right: 100px;
-}
-
-.container input:focus,
 .container select:focus {
     border: 1px solid var(--secondary-color);
     background-color: #fff;
 }
 
-/* Style for elements with class 'col-lg-12' */
-.col-lg-12 {
-    flex: 0 0 100%;
-    max-width: 100%;
-}
-
-/* Style for elements with class 'row m-2' */
-.row.m-2 {
-    margin: 8px;
-}
-
-/* Style for elements with class 'col-md-6 p-4' */
-.col-md-6.p-4 {
-    flex: 0 0 50%;
-    max-width: 60%;
-    padding: 1.5rem;
-}
-
-/* Style for elements with class 'col-6' */
-.col-6 {
-    flex: 0 0 50%;
-    max-width: 67%;
-    width: 300px;
-}
-
-/* Style for elements with class 'row' */
-.row {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    /* Center the columns */
-}
-
-
 .img-section img {
     width: 60px;
     height: 60px;
-    border-radius: 50%;
+    border-radius: 30px;
     border: 1px solid #000000;
     display: block;
     margin: 20px auto;
     object-fit: cover;
 }
+
 
 .container button {
     background-color: var(--secondary-color);
@@ -170,4 +155,11 @@
 
 .container button:hover {
     filter: brightness(80%);
+}
+
+.form-section {
+    background-color: #f7f7f7;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }

@@ -1,16 +1,9 @@
 import React, { useState } from "react";
-import "./Registration.css";
-import {
-  businessCategories,
-  cityOptions,
-  countryOptions,
-} from "../Constants/Constant";
-import noImage from "../images/noImage/noimage.PNG";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 
-function RegistrationForm() {
+const CombinedForm = () => {
   const [formData, setFormData] = useState({
     pharmacy_fullname: "",
     pharmacy_phone: "",
@@ -64,8 +57,8 @@ function RegistrationForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log(formData);
+    console.log("Combined Form Data:", formData);
+    // Add your form submission logic here
   };
 
   return (
@@ -76,7 +69,7 @@ function RegistrationForm() {
 
       <form
         id="addPharmacy"
-        action="https://dukan24h.com/pos/pharmacyRegistrationProcess" //need attention
+        action="https://dukan24h.com/pos/pharmacyRegistrationProcess"
         method="POST"
         encType="multipart/form-data"
         onSubmit={handleSubmit}
@@ -391,7 +384,9 @@ function RegistrationForm() {
             </div>
           </div>
         </div>
+
         <hr />
+
         <div className="submit-btn">
           <div className="text-center">
             <button type="submit" className="btn btn-primary">
@@ -402,6 +397,6 @@ function RegistrationForm() {
       </form>
     </div>
   );
-}
+};
 
-export default RegistrationForm;
+export default CombinedForm;

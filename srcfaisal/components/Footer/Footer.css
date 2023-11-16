@@ -32,24 +32,6 @@
     color: #fff;
     display: block;
     margin-bottom: 10px;
-    text-decoration: none;
-    position: relative;
-}
-
-.footer-links a::after {
-    content: "";
-    display: block;
-    height: 2px;
-    width: 0;
-    background-color: var(--secondary-color);
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    transition: width 0.3s;
-}
-
-.footer-links a:hover::after {
-    width: 100%;
 }
 
 .footer-contact {
