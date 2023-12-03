@@ -12,33 +12,52 @@ import { Link } from "react-router-dom";
 
 function RegistrationForm() {
   const [formData, setFormData] = useState({
-    pharmacy_fullname: "",
-    pharmacy_phone: "",
-    email: "",
+    shop_fullname: "",
+    shop_phone: "",
+    shop_email: "",
     password: "",
     password_confirmation: "",
-    pharmacy_ntn_no: "",
-    pharmacy_gstno: "",
-    pharmacy_code: "",
-    pharmacy_address: "",
-    pharmacy_country: "",
-    pharmacy_city: "",
-    pharmacy_category: "",
-    pharmacy_profileImage: null,
-    pharmacy_location_url: "",
-    pharmacy_access: "",
+    shop_ntn_no: "",
+    shop_gstno: "",
+    shop_code: "",
+    shop_address: "",
+    shop_country: "",
+    shop_city: "",
+    shop_category: "",
+    shop_profileImage: null,
+    shop_location_url: "",
+    shop_access: "",
     owner_fullname: "",
     owner_email: "",
     owner_phone: "",
     owner_cnic: "",
     owner_image: null,
+    otp: "",
   });
+
+  const defaultshop_category = [
+    {
+      value: "clothing",
+      label: "Clothing",
+      description: "Clothing and apparel",
+    },
+    {
+      value: "electronics",
+      label: "Electronics",
+      description: "Electronic gadgets",
+    },
+    { value: "books", label: "Books", description: "Books and literature" },
+    // Add more categories as needed
+  ];
+
+  const [showOtpInput, setShowOtpInput] = useState(false);
 
   const togglePasswordVisibility = () => {
     const passwordInput = document.getElementById("password-input");
     const passwordInputConfirm = document.getElementById(
       "password-input-confirm"
     );
+
     const toggleButton = document.getElementById("toggle-password");
 
     if (passwordInput.type === "password") {
@@ -57,15 +76,44 @@ function RegistrationForm() {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleImageChange = (e) => {
+  // const handleImageChange = (e) => {
+  //   const { name, files } = e.target;
+  //   setFormData({ ...formData, [name]: files[0] });
+  // };
+
+  const handleOwnerImageChange = (e) => {
     const { name, files } = e.target;
     setFormData({ ...formData, [name]: files[0] });
   };
 
-  const handleSubmit = (e) => {
+  const handleShopImageChange = (e) => {
+    const { name, files } = e.target;
+    setFormData({ ...formData, [name]: files[0] });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission here
     console.log(formData);
+    // try {
+    //   // Send the form data to the server
+    //   const response = await fetch(
+    //     "https://dukan24h.com/pos/pharmacyRegistrationProcess",
+    //     {
+    //       method: "POST",
+    //       body: new FormData(document.getElementById("addPharmacy")),
+    //     }
+    //   );
+
+    //   if (response.ok) {
+    //     // Redirect to the admin dashboard on successful submission
+    //     history.push("/admin/dashboard");
+    //   } else {
+    //     // Handle error scenarios
+    //     console.error("Failed to submit the form");
+    //   }
+    // } catch (error) {
+    //   console.error("Error submitting the form", error);
+    // }
   };
 
   return (
@@ -74,7 +122,7 @@ function RegistrationForm() {
         <FontAwesomeIcon icon={faArrowLeft} />
       </Link>
 
-      <form 
+      <form
         id="addPharmacy"
         action="https://dukan24h.com/pos/pharmacyRegistrationProcess" //need attention
         method="POST"
@@ -82,7 +130,7 @@ function RegistrationForm() {
         onSubmit={handleSubmit}
         className="form"
       >
-        <div className="row">     
+        <div className="row">
           <div className="col-md-6 p-4 SP">
             <h3>Shop Information</h3>
             <hr />
@@ -91,9 +139,9 @@ function RegistrationForm() {
                 <div className="col-lg-12">
                   <input
                     type="text"
-                    name="pharmacy_fullname"
+                    name="shop_fullname"
                     placeholder="Enter shop name"
-                    value={formData.pharmacy_fullname}
+                    value={formData.shop_fullname}
                     onChange={handleChange}
                     className="form-control"
                   />
@@ -104,9 +152,9 @@ function RegistrationForm() {
                   <div className="col-lg-12">
                     <input
                       type="number"
-                      name="pharmacy_phone"
+                      name="shop_phone"
                       placeholder="Enter shop phone number"
-                      value={formData.pharmacy_phone}
+                      value={formData.shop_phone}
                       onChange={handleChange}
                       className="form-control"
                       autoComplete="off"
@@ -118,10 +166,10 @@ function RegistrationForm() {
                 <div className="form-group row">
                   <div className="col-lg-12">
                     <input
-                      type="email"
-                      name="email"
+                      type="shop_email"
+                      name="shop_email"
                       placeholder="Enter shop email"
-                      value={formData.email}
+                      value={formData.shop_email}
                       onChange={handleChange}
                       className="form-control"
                     />
@@ -169,6 +217,13 @@ function RegistrationForm() {
                     >
                       Show
                     </button> */}
+                    {formData.password_confirmation !== formData.password ? (
+                      <span className="error-message">
+                        Passwords do not match.
+                      </span>
+                    ) : (
+                      <span className="success-message">Passwords match.</span>
+                    )}
                   </div>
                 </div>
               </div>
@@ -178,9 +233,9 @@ function RegistrationForm() {
                   <div className="col-lg-12">
                     <input
                       type="number"
-                      name="pharmacy_ntn_no"
+                      name="shop_ntn_no"
                       placeholder="NTN No"
-                      value={formData.pharmacy_ntn_no}
+                      value={formData.shop_ntn_no}
                       onChange={handleChange}
                       className="form-control"
                       autoComplete="off"
@@ -193,9 +248,9 @@ function RegistrationForm() {
                   <div className="col-lg-12">
                     <input
                       type="number"
-                      name="pharmacy_gstno"
+                      name="shop_gstno"
                       placeholder="GST No"
-                      value={formData.pharmacy_gstno}
+                      value={formData.shop_gstno}
                       onChange={handleChange}
                       className="form-control"
                       autoComplete="off"
@@ -208,9 +263,9 @@ function RegistrationForm() {
                   <div className="col-lg-12">
                     <input
                       type="text"
-                      name="pharmacy_code"
+                      name="shop_code"
                       placeholder="Postal Code"
-                      value={formData.pharmacy_code}
+                      value={formData.shop_code}
                       onChange={handleChange}
                       className="form-control"
                       autoComplete="off"
@@ -223,9 +278,9 @@ function RegistrationForm() {
                   <div className="col-lg-12">
                     <input
                       type="text"
-                      name="pharmacy_address"
+                      name="shop_address"
                       placeholder="Full Address"
-                      value={formData.pharmacy_address}
+                      value={formData.shop_address}
                       onChange={handleChange}
                       className="form-control"
                       autoComplete="off"
@@ -237,11 +292,11 @@ function RegistrationForm() {
                 <div className="form-group row">
                   <div className="col-lg-12">
                     <select
-                      name="pharmacy_country"
-                      id="pharmacy_country"
-                      value={formData.pharmacy_country}
+                      name="shop_country"
+                      id="shop_country"
+                      value={formData.shop_country}
                       onChange={handleChange}
-                      className="pharmacy_country form-control chosen-select"
+                      className="shop_country form-control chosen-select"
                     >
                       <option value="">Select Country</option>
                       {countryOptions.map((option) => (
@@ -257,9 +312,9 @@ function RegistrationForm() {
                 <div className="form-group row">
                   <div className="col-lg-12">
                     <select
-                      name="pharmacy_city"
+                      name="shop_city"
                       id="city"
-                      value={formData.pharmacy_city}
+                      value={formData.shop_city}
                       onChange={handleChange}
                       className="city form-control"
                     >
@@ -273,24 +328,45 @@ function RegistrationForm() {
                   </div>
                 </div>
               </div>
+              <div className="col-6">
+                <div className="form-group row">
+                  <div className="col-lg-12">
+                    <select
+                      name="shop_category"
+                      id="shop_category"
+                      value={formData.shop_category}
+                      onChange={handleChange}
+                      className="shop_category form-control"
+                    >
+                      <option value="">Select Shop Category</option>
+                      {defaultshop_category.map((category) => (
+                        <option key={category.value} value={category.value}>
+                          {category.label}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+              </div>
+
               <div className="imgSection">
                 <div className="form-group row">
-                  <label className="form-label">Owner's Image</label>
+                  <label className="form-label">Shop's Image</label>
                   <div className="image-handleDiv">
                     <input
                       type="file"
-                      name="owner_image"
-                      id="owner_image"
+                      name="shop_profileImage"
+                      id="shop_profileImage"
                       accept="image/*"
-                      onChange={handleImageChange}
+                      onChange={handleShopImageChange}
                     />
                   </div>
                   <div className="img-section">
                     <img
-                      id="output_owner_image"
+                      id="output_shop_profileImage"
                       src={
-                        formData.owner_image
-                          ? URL.createObjectURL(formData.owner_image)
+                        formData.shop_profileImage
+                          ? URL.createObjectURL(formData.shop_profileImage)
                           : noImage
                       }
                       // alt={noImage}
@@ -372,7 +448,7 @@ function RegistrationForm() {
                       name="owner_image"
                       id="owner_image"
                       accept="image/*"
-                      onChange={handleImageChange}
+                      onChange={handleOwnerImageChange}
                     />
                   </div>
                   <div className="img-section">
