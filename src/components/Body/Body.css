@@ -7,14 +7,15 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    margin: 20px 350px;
+    margin-top: 3%;
+    margin-bottom: 3%;
 }
 
 .shop-card {
     border: 1px solid #ddd;
     padding: 10px;
     margin: 10px;
-    width: 180px;
+    width: 200px;
     text-align: center;
     background-color: var(--background-color);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -58,8 +59,8 @@
 .products-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
-    margin: 20px 400px;
+    justify-content: space-evenly;
+    /* margin: 20px 400px; */
 }
 
 .product-card {
@@ -85,10 +86,10 @@
     overflow-x: auto;
     background-color: #fff;
     padding: 5px 5px 0 5px;
-    border: 1px solid #ccc;
     border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin: 25px;
+    box-shadow: 0 15px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 2%;
+    margin-bottom: 5%;
     padding: 5px;
 }
 
@@ -107,7 +108,10 @@
 
 .newsletter-text {
     flex: 1;
+    text-align: start;
+    /* Takes up available space */
     padding-right: 20px;
+    /* Add spacing between text and input area */
 }
 
 .newsletter-text h4 {
@@ -117,6 +121,8 @@
 
 .newsletter-input {
     flex: 1;
+    padding-left: 15%;
+    /* Takes up available space */
 }
 
 .input-group {
@@ -126,11 +132,14 @@
 }
 
 .input-group input {
+    border-radius: 0%;
     flex: 1;
+    /* Takes up available space */
     height: 40px;
     border: none;
     border-bottom: 1px solid white;
-    background-color: transparent;
+    /* Example border for input */
+    background-color: #fff;
     color: white;
 }
 
@@ -147,4 +156,14 @@
 
 .input-group-append button:hover {
     filter: brightness(50%);
+}
+.val{
+    font-size: 16px;
+}
+.latest-product-heading h1{
+    color: #f57224;    
+}
+
+.latest-product-heading{
+    padding-top: 3%; 
 }

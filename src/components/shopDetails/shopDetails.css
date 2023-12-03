@@ -3,6 +3,7 @@
     color: red;
     border: 1px solid red;
 }
+
 .back {
     position: fixed;
     left: 3%;
@@ -30,10 +31,13 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+  
+    
     background-repeat: no-repeat;
     background-size: cover;
     overflow-y: auto;
-    filter: opacity(1);
+    padding: 20px;
+
 }
 
 
@@ -41,6 +45,11 @@
     display: flex;
 }
 
+
+
+/* hr {
+    margin-top: 5px;
+} */
 
 .container h3 {
     color: #333;
@@ -51,11 +60,12 @@
 }
 
 
+
 .container input[type="text"],
 .container input[type="email"],
 .container input[type="number"],
 .container input[type="file"] {
-    width: 100%;
+    width: 50%;
     padding: 12px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
@@ -140,7 +150,14 @@
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-.SP{
-    background-color: #fa9154;
-    filter: opacity(1);
+.dukan{
+    border: 1px solid #000000;
+    border-radius: 2%;
+}
+.details{
+    margin-bottom: 10%;
+}
+.products{
+    margin-bottom: 10%;
+    margin-top: 4%;
 }

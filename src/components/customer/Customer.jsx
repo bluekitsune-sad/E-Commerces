@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Registration.css";
+import "./Customer.css";
 import {
   businessCategories,
   cityOptions,
@@ -10,7 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 
-function RegistrationForm() {
+function CustomerForm() {
   const [formData, setFormData] = useState({
     pharmacy_fullname: "",
     pharmacy_phone: "",
@@ -80,13 +80,12 @@ function RegistrationForm() {
         method="POST"
         encType="multipart/form-data"
         onSubmit={handleSubmit}
-        className="form"
       >
-        <div className="row">     
-          <div className="col-md-6 p-4 SP">
-            <h3>Shop Information</h3>
+        <div className="row justify-content-center">
+          <div className="col-md-6 p-4">
+            <h3>Customer Information</h3>
             <hr />
-            <div className="row">
+            <div className="row m-2">
               <div className="form-group">
                 <div className="col-lg-12">
                   <input
@@ -300,7 +299,7 @@ function RegistrationForm() {
               </div>
             </div>
           </div>
-          <div className="PI col-md-6 p-4">
+          {/* <div className="col-md-6 p-4">
             <h3>Personal Information</h3>
             <hr />
             <div className="row m-2">
@@ -389,9 +388,10 @@ function RegistrationForm() {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
-        <div className="submit-btn mt-3">
+        <hr />
+        <div className="submit-btn">
           <div className="text-center">
             <button type="submit" className="btn btn-primary">
               Submit
@@ -400,7 +400,8 @@ function RegistrationForm() {
         </div>
       </form>
     </div>
+    
   );
 }
 
-export default RegistrationForm;
+export default CustomerForm;

@@ -1,0 +1,10 @@
+.shop-card h4{
+    color: #333;
+    text-decoration: aliceblue underline;
+    margin-top: 5%;
+}
+.shop-card p{
+    font-size: 16px;
+    color: #333;
+    text-decoration: aliceblue underline;
+}

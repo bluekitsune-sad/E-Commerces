@@ -1,68 +1,62 @@
-// import React, { useContext } from "react";
-// import { Link } from "react-router-dom";
-// // import CartContext from "path/to/your/context";
-// import "./CartPage.css";
+import React from "react";
+import './CP.css';
 
-// const CartPage = () => {
-//   const { cartItems, removeFromCart } = useContext(CartContext);
+function CartPage() {
+  return (
+<div className="cartpage">
+    <div className="lsbar">
+<div className="lsbdata">
+<table className="tabled">
+  <tr className="trh">
+    <th>Image</th>
+    <th>Product name</th>
+    <th>price</th>
+    <th>Quantity</th>
+    <th>Total (Rs)</th>
+    <th>Action</th>
 
-//   const calculateTotal = () => {
-//     return cartItems.reduce((total, item) => total + item.price, 0);
-//   };
+  </tr>
+  <tr >
+    <td>img</td>
+    <td>Shirt</td>
+    <td>$20</td>
+    <td>2</td>
+    <td>20$</td>
+    <td>Ordered</td>
+  </tr>
+  <tr>
+  <td>img</td>
+    <td>Shirt</td>
+    <td>$20</td>
+    <td>2</td>
+    <td>20$</td>
+    <td>Ordered</td>
+  </tr>
+</table>
+</div>
+    </div>
+    <div className="rsbar">
+       <div className="tabledata">
+         <div className="ct">
+          <p>Cart Total</p>
+          <hr />
+         </div>
+         <div className="st">
+          <p>Sub Total</p>
+          <hr />
+         </div>
+         <div className="t">
+          <p className="tcolor">Total</p>
+        
+         </div>
+       <div className="btncart">
+        <button className="bcr" >Proceed to checkout</button>
+       </div>
+       </div>
+    </div>
+  </div>
+  )
+  ;
+}
 
-//   const calculateSubtotal = () => {
-//     return calculateTotal();
-//   };
-
-//   return (
-//     <div className="cart-page">
-//       <div className="cart-page-sections">
-//         <div className="cart-items-section">
-//           <h2>Your Shopping Cart</h2>
-//           <div className="cart-table">
-//             <table className="cart-item-table">
-//               <thead>
-//                 <tr className="table-header-row">
-//                   <th>Product</th>
-//                   <th>Price</th>
-//                   <th>Action</th>
-//                 </tr>
-//               </thead>
-//               <tbody>
-//                 {cartItems.map((item) => (
-//                   <tr key={item.id}>
-//                     <td>{item.name}</td>
-//                     <td>${item.price}</td>
-//                     <td>
-//                       <button onClick={() => removeFromCart(item)}>
-//                         Remove
-//                       </button>
-//                     </td>
-//                   </tr>
-//                 ))}
-//               </tbody>
-//             </table>
-//           </div>
-//         </div>
-//         <div className="cart-summary-section">
-//           <div className="cart-summary">
-//             <h3>Order Summary</h3>
-//             <div>
-//               <span>Subtotal:</span>
-//               <span>${calculateSubtotal()}</span>
-//             </div>
-//             <div>
-//               <span>Total:</span>
-//               <span>${calculateTotal()}</span>
-//             </div>
-//             <Link to="/checkout" className="proceed-to-checkout-btn">
-//               <button className="checkout-btn">Proceed to Checkout</button>
-//             </Link>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default CartPage;
+export default CartPage;

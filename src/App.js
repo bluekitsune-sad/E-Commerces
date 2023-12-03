@@ -3,6 +3,7 @@ import "./App.css";
 import Header from "./components/Header/Header";
 import Body from "./components/Body/Body";
 import Footer from "./components/Footer/Footer";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Routes from "./components/Routes/Route";
 import RegistrationForm from "./components/registration/Registration";
 

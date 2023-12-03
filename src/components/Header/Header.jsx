@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "./Header.css";
-import logo from "../images/dukan_logo.PNG";
+import logo from "../images/logo-head.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import MyNavbar from "../navbar/navbar";
+// import Container from 'react-bootstrap/Container';
+// import Nav from 'react-bootstrap/Nav';
+// import Navbar from 'react-bootstrap/Navbar';
+// import NavDropdown from 'react-bootstrap/NavDropdown';
 import {
   faShoppingCart,
   faChevronUp,
@@ -12,7 +17,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { businessCategories } from "../Constants/Constant";
 import { Link, useNavigate } from "react-router-dom";
-import CustomerLoginPopup from "./ClientLogin";
 
 const Header = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -22,7 +26,6 @@ const Header = () => {
   const [searchValue, setSearchValue] = useState("");
   const [selectedItem, setSelectedItem] = useState(null);
   const navigate = useNavigate();
-  const [isPopupOpen, setPopupOpen] = useState(false);
 
   const items = [
     { id: 1, name: "Item 1", description: "Description for Item 1" },
@@ -30,14 +33,6 @@ const Header = () => {
     { id: 3, name: "Item 3", description: "Description for Item 3" },
     // Add more items with descriptions
   ];
-
-  const openPopup = () => {
-    setPopupOpen(true);
-  };
-
-  const closePopup = () => {
-    setPopupOpen(false);
-  };
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -85,16 +80,17 @@ const Header = () => {
           className="cart-dropdown"
           onClick={(e) => e.stopPropagation()}
           onMouseLeave={toggleCart}
+          style={{width:'2000%'}}
         >
           <ul>
             {cartItems.map((item) => (
               <li key={item.id}>
-                {item.name} - ${item.price}
-                <button onClick={() => removeFromCart(item)}>Remove</button>
+                <img src='https://retailminded.com/wp-content/uploads/2016/03/EN_GreenOlive-1.jpg' style={{width:'10%', hight:'10%'}}/> {item.name} - ${item.price}
+                <button onClick={() => removeFromCart(item)} style={{width:'20%', height:"10%", marginLeft:'10px'}}>Remove</button>
               </li>
             ))}
           </ul>
-          <Link to={{ pathname: "/cartPage", state: { cartItems } }}>
+          <Link to="/cartPage">
             <button>View Cart</button>
           </Link>
           <Link to="/checkoutPage">
@@ -106,43 +102,29 @@ const Header = () => {
   );
 
   return (
+    <>
+            {/* <MyNavbar></MyNavbar> */}
+
     <div className="header-container">
       <div className="top-bar">
         <Link to="/registration" className="top-bar-button">
-          <FontAwesomeIcon icon={faSignInAlt} />
-          Shop-Login/Register
+          {/* <FontAwesomeIcon icon={faSignInAlt} /> */}
+          Shop - Login / Register
         </Link>
 
-        <div className="search-bar">
-          <input type="text" placeholder="Search..." />
+        
 
-          <Link to="/searchResultPage">
-            <button>
-              <FontAwesomeIcon icon={faSearch} /> {/* //need attention */}
-            </button>
-          </Link>
-        </div>
 
-        {/* <button onClick={openPopup}>
-          <FontAwesomeIcon icon={faUserAlt} />
-          Customer-Login/Register
-        </button> */}
-        <Link to="/registration" className="top-bar-button">
-          <FontAwesomeIcon icon={faUserAlt} />
-          Customer-Login/Register
+        <Link to="/customer" className="top-bar-button">
+          {/* <FontAwesomeIcon icon={faUserAlt} /> */}
+          Customer - Login / Register
         </Link>
         {/* <button className="top-bar-button">
           <FontAwesomeIcon icon={faUserAlt} />
           Customer-Login/Register
         </button> */}
       </div>
-
-      {isPopupOpen && (
-        <div className="overlay-clientLogin" onClick={closePopup}>
-          <div className="form-box" onClick={(e) => e.stopPropagation()}></div>
-        </div>
-      )}
-
+  
       <header className="header">
         <div className="logo">
           <Link to="/">
@@ -162,17 +144,17 @@ const Header = () => {
             </button>
             {isDropdownOpen && (
               <div className="dropdown-menu">
-                <input
+                {/* <input
                   type="text"
                   placeholder="Search..."
                   value={searchValue}
                   onChange={(e) => setSearchValue(e.target.value)}
-                />
+                /> */}
                 <ul className="scrollable-list">
                   {filteredItems.map((item) => (
                     <Link
                       key={item.value}
-                      to={`/category/${item.value}`}
+                      to='shopDetails'
                       onMouseEnter={() => setSelectedItem(item)}
                       onClick={() => handleItemClick(item)}
                       className="category-link"
@@ -183,26 +165,63 @@ const Header = () => {
                   ))}
                 </ul>
                 {selectedItem && (
-                  <div
+                  <div style={{marginRight:'20px'}}
                     className={`description ${selectedItem ? "active" : ""}`}
                   >
-                    {/* <img src={selectedItem.img} alt="no image" /> */}
-                    <p>{selectedItem.description}</p>
+                    <div>
+                      <img src='https://retailminded.com/wp-content/uploads/2016/03/EN_GreenOlive-1.jpg' style={{width:'10%', hight:'10%'}}/>
+                      <h3>{selectedItem.description}</h3>
+                    </div>
+                    
                   </div>
                 )}
               </div>
             )}
           </div>
         </div>
+
         <div className="home">
           <Link to="/">Home</Link>
-          <Link to="/">About Us</Link>
-          <Link to="/">Contact Us</Link>
         </div>
 
+       <div className="search-bar">
+          <input type="text" placeholder="Search Shop & Product" />
+
+          <Link to="/searchResultPage">
+            <button>
+              <FontAwesomeIcon icon={faSearch} /> 
+            </button>
+          </Link>
+        </div>
+        
+
+        {/* <div className="textiya">
+          <div class="mb-3 navbar-filter">
+            <select class="form-select select" name="" id="">
+              <option selected>Select one</option>
+              <option value="">New Delhi</option>
+              <option value="">Istanbul</option>
+              <option value="">Jakarta</option>
+            </select>
+            <select class="form-select select" name="" id="">
+              <option selected>Select one</option>
+              <option value="">New Delhi</option>
+              <option value="">Istanbul</option>
+              <option value="">Jakarta</option>
+            </select>
+              <input type="text"
+                class="form-control" name="" id="" aria-describedby="helpId" placeholder="Location"/>
+          </div>
+        </div> */}
+        
         {cartIcon}
+
+
       </header>
     </div>
+
+     
+   </>
   );
 };
 

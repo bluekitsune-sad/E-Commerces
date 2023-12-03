@@ -3,6 +3,7 @@ import SlidingImages from "./Slider";
 import Shop from "./Shop";
 import MostSellers from "./mostSeller";
 import Product from "./Product";
+import MyNavbar from "../navbar/navbar";
 import "./Body.css";
 import FeatureItem from "./FeatureItem";
 
@@ -91,7 +92,9 @@ function Body() {
   return (
     <>
       <div className="body-container">
-        <SlidingImages />
+        <SlidingImages/>
+        <br/>
+
         <div className="feature-bar">
           <FeatureItem
             iconName="faIdCard"
@@ -115,26 +118,27 @@ function Body() {
           />
         </div>
         <div className="some-text">
-          <h4>VIEW ALL SHOPS</h4>
-          <h1>Dukan24h Shop</h1>
+          <h6 className="val">VIEW ALL SHOPS</h6>
+          <h1 >Dukan24h Shop</h1>
         </div>
-        <h2>Shops</h2>
+        
         <div className="shops-container">
           {shops.map((shop) => (
             <Shop key={shop.id} {...shop} />
           ))}
         </div>
+
         {/* <MostSellers sellers={mostSellers} /> */}
-        <div className="container-fluid">
+        <div className="container-fluid p-4">
           <div className="row newsletter-row">
-            <div className="newsletter-text">
+            <div className="col newsletter-text">
               <h4 className="text-white">Subscribe Our Newsletter!</h4>
               <p className="text-white">
                 Subscribe to our newsletter for featured promotions and new
                 products!
               </p>
             </div>
-            <div className="newsletter-input">
+            <div className="col newsletter-input">
               <form>
                 <div className="input-group">
                   <input
@@ -153,19 +157,26 @@ function Body() {
             </div>
           </div>
         </div>
-        <h2>Latest Products</h2>
+        <div className="latest-product-heading">
+        <h5>LATEST</h5>
+        <h1>PRODUCTS</h1>
+        </div>
         <div className="products-container">
           {products.map((product) => (
             <Product key={product.id} {...product} />
           ))}
         </div>
-        <h2>Featured Products</h2>
+        <div className="latest-product-heading">
+        <h5>FEATURE</h5>
+        <h1>PRODUCTS</h1>
+        </div>
         <div className="products-container">
           {products.map((product) => (
             <Product key={product.id} {...product} />
           ))}
         </div>
       </div>
+      
     </>
   );
 }
