@@ -32,7 +32,8 @@ function RegistrationForm() {
     owner_phone: "",
     owner_cnic: "",
     owner_image: null,
-    otp: "",
+    // otp: "",
+    otp: Math.floor(Math.random() * 1000) + 100,
   });
 
   const defaultshop_category = [
@@ -94,26 +95,28 @@ function RegistrationForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formData);
-    // try {
-    //   // Send the form data to the server
-    //   const response = await fetch(
-    //     "https://dukan24h.com/pos/pharmacyRegistrationProcess",
-    //     {
-    //       method: "POST",
-    //       body: new FormData(document.getElementById("addPharmacy")),
-    //     }
-    //   );
 
-    //   if (response.ok) {
-    //     // Redirect to the admin dashboard on successful submission
-    //     history.push("/admin/dashboard");
-    //   } else {
-    //     // Handle error scenarios
-    //     console.error("Failed to submit the form");
-    //   }
-    // } catch (error) {
-    //   console.error("Error submitting the form", error);
-    // }
+    try {
+      // Send the form data to the server
+      const response = await fetch("http://localhost:3000/api/registerShop", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData), // Send formData directly
+      });
+
+      if (response.ok) {
+        // Handle success scenario
+        console.log("Registration successful");
+        // Redirect or perform other actions after successful registration
+      } else {
+        // Handle error scenarios
+        console.error("Failed to register");
+      }
+    } catch (error) {
+      console.error("Error submitting the form", error);
+    }
   };
 
   return (
@@ -124,7 +127,7 @@ function RegistrationForm() {
 
       <form
         id="addPharmacy"
-        action="https://dukan24h.com/pos/pharmacyRegistrationProcess" //need attention
+        action="http://localhost:3000/api/registerShop"
         method="POST"
         encType="multipart/form-data"
         onSubmit={handleSubmit}
