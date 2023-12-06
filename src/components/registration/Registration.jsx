@@ -98,14 +98,14 @@ function RegistrationForm() {
 
     try {
       // Send the form data to the server
-      const response = await fetch("http://localhost:3000/api/registerShop", {
+      const response = await fetch("http://localhost:3001/api/registerShop", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formData), // Send formData directly
       });
-
+      // console.log("helllo");
       if (response.ok) {
         // Handle success scenario
         console.log("Registration successful");
@@ -127,7 +127,7 @@ function RegistrationForm() {
 
       <form
         id="addPharmacy"
-        action="http://localhost:3000/api/registerShop"
+        action="http://localhost:3001/api/registerShop"
         method="POST"
         encType="multipart/form-data"
         onSubmit={handleSubmit}
