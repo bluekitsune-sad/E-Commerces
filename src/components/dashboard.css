@@ -1,0 +1,83 @@
+/* DashboardStyles.css */
+
+/* .root {
+    display: flex;
+}
+
+.toolbar {
+    padding-right: 24; */
+/* keep right padding when drawer closed */
+/* } */
+/* 
+.toolbarIcon {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 8px; */
+/* Include other styles from theme.mixins.toolbar if needed */
+/* } */
+
+/* .appBar {
+    z-index: 1200; */
+/* Make sure it's higher than drawer */
+/* transition: width 225ms cubic-bezier(0.4, 0, 0.6, 1) 0ms,
+        margin 225ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;
+} */
+
+/* .appBarShift {
+    margin-left: 240px;
+    width: calc(100% - 240px);
+    transition: width 225ms cubic-bezier(0.4, 0, 0.6, 1) 0ms,
+        margin 225ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;
+}
+
+.menuButton {
+    margin-right: 36px;
+}
+
+.menuButtonHidden {
+    display: none;
+}
+
+.title {
+    flex-grow: 1;
+}
+
+.drawerPaper {
+    position: relative;
+    white-space: nowrap;
+    width: 240px;
+    transition: width 225ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;
+}
+
+.drawerPaperClose {
+    overflow-x: hidden;
+    transition: width 225ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;
+    width: 70px;
+}
+
+.appBarSpacer {
+    min-height: 64px;
+}
+
+.content {
+    flex-grow: 1;
+    height: 100vh;
+    overflow: auto;
+}
+
+.container {
+    padding-top: 16px;
+    padding-bottom: 16px;
+}
+
+.paper {
+    padding: 16px;
+    display: flex;
+    overflow: auto;
+    flex-direction: column;
+}
+
+.fixedHeight {
+    height: 240px;
+} */
