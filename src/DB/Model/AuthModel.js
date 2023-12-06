@@ -56,7 +56,8 @@ const shopSchema = new mongoose.Schema({
     trim: true,
   },
   shop_profileImage: {
-    type: Buffer,
+    type: String,
+    trim: true,
   },
   shop_location_url: {
     type: String,
@@ -83,7 +84,8 @@ const shopSchema = new mongoose.Schema({
     trim: true,
   },
   owner_image: {
-    type: Buffer,
+    type: String,
+    trim: true,
   },
   otp: {
     type: String,

@@ -1,4 +1,5 @@
-import { Router, Application } from "express";
+// import { Router, Application } from "express";
+import { Router } from "express";
 import AuthController from "../AuthController/AuthController.js";
 
 export let AuthRouters = Router();

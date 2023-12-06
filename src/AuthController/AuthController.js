@@ -129,7 +129,6 @@ const getFullDB = async (req, res) => {
   }
 };
 
-// Middleware to authenticate shop before accessing the profile
 const authenticateShop = (req, res, next) => {
   const token = req.header("Authorization");
 
