@@ -12,26 +12,21 @@ import { Link } from "react-router-dom";
 
 function CustomerForm() {
   const [formData, setFormData] = useState({
-    pharmacy_fullname: "",
-    pharmacy_phone: "",
-    email: "",
+    customer_fullname: "",
+    customer_phone: "",
+    customer_email: "",
     password: "",
     password_confirmation: "",
-    pharmacy_ntn_no: "",
-    pharmacy_gstno: "",
-    pharmacy_code: "",
-    pharmacy_address: "",
-    pharmacy_country: "",
-    pharmacy_city: "",
-    pharmacy_category: "",
-    pharmacy_profileImage: null,
-    pharmacy_location_url: "",
-    pharmacy_access: "",
-    owner_fullname: "",
-    owner_email: "",
-    owner_phone: "",
-    owner_cnic: "",
-    owner_image: null,
+    customer_ntn_no: "",
+    customer_gstno: "",
+    customer_code: "",
+    customer_address: "",
+    customer_country: "",
+    customer_city: "",
+    customer_profileImage: null,
+    customer_location_url: "",
+    // otp: "",
+    otp: Math.floor(Math.random() * 1000) + 100,
   });
 
   const togglePasswordVisibility = () => {
@@ -52,20 +47,53 @@ function CustomerForm() {
     }
   };
 
+  const [showOtpInput, setShowOtpInput] = useState(false);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleImageChange = (e) => {
+  // const handleImageChange = (e) => {
+  //   const { name, files } = e.target;
+  //   setFormData({ ...formData, [name]: files[0] });
+  // };
+
+  const handleOwnerImageChange = (e) => {
     const { name, files } = e.target;
     setFormData({ ...formData, [name]: files[0] });
   };
 
-  const handleSubmit = (e) => {
+  const handleShopImageChange = (e) => {
+    const { name, files } = e.target;
+    setFormData({ ...formData, [name]: files[0] });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission here
     console.log(formData);
+
+    try {
+      // Send the form data to the server
+      const response = await fetch("http://localhost:3001/api/addCustomer", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData), // Send formData directly
+      });
+      // console.log("helllo");
+      if (response.ok) {
+        // Handle success scenario
+        console.log("Registration successful");
+        // Redirect or perform other actions after successful registration
+      } else {
+        // Handle error scenarios
+        console.error("Failed to register");
+      }
+    } catch (error) {
+      console.error("Error submitting the form", error);
+    }
   };
 
   return (
@@ -74,9 +102,9 @@ function CustomerForm() {
         <FontAwesomeIcon icon={faArrowLeft} />
       </Link>
 
-      <form 
+      <form
         id="addPharmacy"
-        action="https://dukan24h.com/pos/pharmacyRegistrationProcess" //need attention
+        action="http://localhost:3001/api/addCustomer" //need attention
         method="POST"
         encType="multipart/form-data"
         onSubmit={handleSubmit}
@@ -90,9 +118,9 @@ function CustomerForm() {
                 <div className="col-lg-12">
                   <input
                     type="text"
-                    name="pharmacy_fullname"
-                    placeholder="Enter shop name"
-                    value={formData.pharmacy_fullname}
+                    name="customer_fullname"
+                    placeholder="Enter customer name"
+                    value={formData.customer_fullname}
                     onChange={handleChange}
                     className="form-control"
                   />
@@ -103,9 +131,9 @@ function CustomerForm() {
                   <div className="col-lg-12">
                     <input
                       type="number"
-                      name="pharmacy_phone"
-                      placeholder="Enter shop phone number"
-                      value={formData.pharmacy_phone}
+                      name="customer_phone"
+                      placeholder="Enter customer phone number"
+                      value={formData.customer_phone}
                       onChange={handleChange}
                       className="form-control"
                       autoComplete="off"
@@ -118,9 +146,9 @@ function CustomerForm() {
                   <div className="col-lg-12">
                     <input
                       type="email"
-                      name="email"
-                      placeholder="Enter shop email"
-                      value={formData.email}
+                      name="customer_email"
+                      placeholder="Enter customer email"
+                      value={formData.customer_email}
                       onChange={handleChange}
                       className="form-control"
                     />
@@ -168,6 +196,13 @@ function CustomerForm() {
                     >
                       Show
                     </button> */}
+                    {formData.password_confirmation !== formData.password ? (
+                      <span className="error-message">
+                        Passwords do not match.
+                      </span>
+                    ) : (
+                      <span className="success-message">Passwords match.</span>
+                    )}
                   </div>
                 </div>
               </div>
@@ -177,9 +212,9 @@ function CustomerForm() {
                   <div className="col-lg-12">
                     <input
                       type="number"
-                      name="pharmacy_ntn_no"
+                      name="customer_ntn_no"
                       placeholder="NTN No"
-                      value={formData.pharmacy_ntn_no}
+                      value={formData.customer_ntn_no}
                       onChange={handleChange}
                       className="form-control"
                       autoComplete="off"
@@ -192,9 +227,9 @@ function CustomerForm() {
                   <div className="col-lg-12">
                     <input
                       type="number"
-                      name="pharmacy_gstno"
+                      name="customer_gstno"
                       placeholder="GST No"
-                      value={formData.pharmacy_gstno}
+                      value={formData.customer_gstno}
                       onChange={handleChange}
                       className="form-control"
                       autoComplete="off"
@@ -207,9 +242,9 @@ function CustomerForm() {
                   <div className="col-lg-12">
                     <input
                       type="text"
-                      name="pharmacy_code"
+                      name="customer_code"
                       placeholder="Postal Code"
-                      value={formData.pharmacy_code}
+                      value={formData.customer_code}
                       onChange={handleChange}
                       className="form-control"
                       autoComplete="off"
@@ -222,9 +257,9 @@ function CustomerForm() {
                   <div className="col-lg-12">
                     <input
                       type="text"
-                      name="pharmacy_address"
+                      name="customer_address"
                       placeholder="Full Address"
-                      value={formData.pharmacy_address}
+                      value={formData.customer_address}
                       onChange={handleChange}
                       className="form-control"
                       autoComplete="off"
@@ -236,9 +271,9 @@ function CustomerForm() {
                 <div className="form-group row">
                   <div className="col-lg-12">
                     <select
-                      name="pharmacy_country"
-                      id="pharmacy_country"
-                      value={formData.pharmacy_country}
+                      name="customer_country"
+                      id="customer_country"
+                      value={formData.customer_country}
                       onChange={handleChange}
                       className="pharmacy_country form-control chosen-select"
                     >
@@ -256,9 +291,9 @@ function CustomerForm() {
                 <div className="form-group row">
                   <div className="col-lg-12">
                     <select
-                      name="pharmacy_city"
+                      name="customer_city"
                       id="city"
-                      value={formData.pharmacy_city}
+                      value={formData.customer_city}
                       onChange={handleChange}
                       className="city form-control"
                     >
@@ -274,14 +309,14 @@ function CustomerForm() {
               </div>
               <div className="imgSection">
                 <div className="form-group row">
-                  <label className="form-label">Owner's Image</label>
+                  <label className="form-label">Customer's Image</label>
                   <div className="image-handleDiv">
                     <input
                       type="file"
-                      name="owner_image"
-                      id="owner_image"
+                      name="customer_profileImage"
+                      id="customer_profileImage"
                       accept="image/*"
-                      onChange={handleImageChange}
+                      onChange={handleOwnerImageChange}
                     />
                   </div>
                   <div className="img-section">
@@ -299,96 +334,6 @@ function CustomerForm() {
               </div>
             </div>
           </div>
-          {/* <div className="col-md-6 p-4">
-            <h3>Personal Information</h3>
-            <hr />
-            <div className="row m-2">
-              <div className="form-group">
-                <div className="name-section">
-                  <input
-                    type="hidden"
-                    name="_token"
-                    defaultValue="rUBDtb9zIqsa2xs5XaifXSNFTRKvYqDtJOWmIiWh"
-                  />
-                  <input
-                    type="text"
-                    name="owner_fullname"
-                    placeholder="Owner’s name"
-                    value={formData.owner_fullname}
-                    onChange={handleChange}
-                    className="form-control"
-                  />
-                </div>
-              </div>
-              <div className="col-6">
-                <div className="email-section">
-                  <div className="col-lg-12">
-                    <input
-                      type="email"
-                      name="owner_email"
-                      placeholder="Owner’s Email"
-                      value={formData.owner_email}
-                      onChange={handleChange}
-                      className="form-control"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="col-6">
-                <div className="form-group row">
-                  <div className="phone-section">
-                    <input
-                      type="number"
-                      name="owner_phone"
-                      placeholder="Owner’s Phone"
-                      value={formData.owner_phone}
-                      onChange={handleChange}
-                      className="form-control"
-                      autoComplete="off"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="form-group row">
-                <div className="cnic-section">
-                  <input
-                    type="number"
-                    name="owner_cnic"
-                    placeholder="Owner’s CNIC No"
-                    value={formData.owner_cnic}
-                    onChange={handleChange}
-                    className="form-control"
-                    autoComplete="off"
-                  />
-                </div>
-              </div>
-              <div className="imgSection">
-                <div className="form-group row">
-                  <label className="form-label">Owner's Image</label>
-                  <div className="image-handleDiv">
-                    <input
-                      type="file"
-                      name="owner_image"
-                      id="owner_image"
-                      accept="image/*"
-                      onChange={handleImageChange}
-                    />
-                  </div>
-                  <div className="img-section">
-                    <img
-                      id="output_owner_image"
-                      src={
-                        formData.owner_image
-                          ? URL.createObjectURL(formData.owner_image)
-                          : noImage
-                      }
-                      // alt={noImage}
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div> */}
         </div>
         <hr />
         <div className="submit-btn">
@@ -400,7 +345,6 @@ function CustomerForm() {
         </div>
       </form>
     </div>
-    
   );
 }
 
