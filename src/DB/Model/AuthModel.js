@@ -93,6 +93,60 @@ const shopSchema = new mongoose.Schema({
   },
 });
 
-const ShopModel = mongoose.model("Shop", shopSchema);
+const customerSchema = new mongoose.Schema({
+  customer_fullname: {
+    type: String,
+    required: true,
+  },
+  customer_phone: {
+    type: String,
+    required: true,
+  },
+  customer_email: {
+    type: String,
+    required: true,
+    unique: true,
+    lowercase: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+  password_confirmation: {
+    type: String,
+    required: true,
+  },
+  customer_ntn_no: {
+    type: String,
+  },
+  customer_gstno: {
+    type: String,
+  },
+  customer_code: {
+    type: String,
+  },
+  customer_address: {
+    type: String,
+  },
+  customer_country: {
+    type: String,
+  },
+  customer_city: {
+    type: String,
+  },
+  customer_profileImage: {
+    type: String,
+  },
+  customer_location_url: {
+    type: String,
+  },
+  otp: {
+    type: String,
+    required: true,
+  },
+});
 
-export default ShopModel;
+const ShopModel = mongoose.model("Shop", shopSchema);
+const CustomerModel = mongoose.model("Customer", customerSchema);
+
+export default { ShopModel, CustomerModel };

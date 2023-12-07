@@ -1,4 +1,5 @@
 import ShopModel from "../DB/Model/AuthModel.js";
+import CustomerModel from "../DB/Model/AuthModel.js";
 import jwt from "jsonwebtoken";
 
 const createShop = async (req, res) => {
@@ -71,6 +72,60 @@ const createShop = async (req, res) => {
   }
 };
 
+const addCustomer = async (req, res) => {
+  try {
+    const {
+      customer_fullname,
+      customer_phone,
+      customer_email,
+      password,
+      password_confirmation,
+      customer_ntn_no,
+      customer_gstno,
+      customer_code,
+      customer_address,
+      customer_country,
+      customer_city,
+      customer_profileImage,
+      customer_location_url,
+      otp,
+    } = req.body;
+
+    const existingCustomer = await CustomerModel.findOne({ shop_email });
+
+    if (existingCustomer) {
+      return res.status(400).send("Customer Already Exists");
+    }
+
+    const newCutomer = new CustomerModel({
+      customer_fullname,
+      customer_phone,
+      customer_email,
+      password,
+      password_confirmation,
+      customer_ntn_no,
+      customer_gstno,
+      customer_code,
+      customer_address,
+      customer_country,
+      customer_city,
+      customer_profileImage,
+      customer_location_url,
+      otp,
+    });
+
+    const savedCustomer = await newCutomer.save();
+
+    savedCustomer.password = undefined;
+    savedCustomer.password_confirmation = undefined;
+
+    return res.status(201).json(savedCustomer);
+  } catch (err) {
+    console.error(err);
+    return res.status(500).send(err.message);
+  }
+};
+
 const loginShop = async (req, res) => {
   try {
     const { shop_email, password } = req.body;
@@ -115,17 +170,27 @@ const getShopProfile = async (req, res) => {
   }
 };
 
-const getFullDB = async (req, res) => {
+const getFullShopDB = async (req, res) => {
   try {
     const shops = await ShopModel.find();
-
-    // Log the retrieved shop data
     console.log("Retrieved Shop Data:", shops);
 
     return res.status(200).json(shops);
   } catch (err) {
     console.error(err);
     return res.status(500).send("Internal Server Error");
+  }
+};
+
+const getFullCustomerDB = async (req, res) => {
+  try {
+    const customers = await CustomerModel.find();
+    console.log("Retrieved Shop Data:", customers);
+
+    return res.status(200).json(customers);
+  } catch (err) {
+    console.error(err);
+    return res.status(500).send(err.message);
   }
 };
 
@@ -151,7 +216,8 @@ const AuthController = {
   loginShop,
   getShopProfile,
   authenticateShop,
-  getFullDB,
+  getFullShopDB,
+  getFullCustomerDB,
 };
 
 export default AuthController;
