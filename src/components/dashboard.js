@@ -1,66 +1,35 @@
-import React from "react";
-
-import clsx from "clsx";
-// import { makeStyles } from '@material-ui/core/styles';
-// import { makeStyles } from "@mui/material/styles";
-// import { makeStyles } from "@mui/styles";
-// import { styled, makeStyles } from "@mui/system";
-// import "./dashboard.css";
-import { createTheme } from "@mui/material/styles";
-
-import CssBaseline from "@mui/material/CssBaseline";
-import Drawer from "@mui/material/Drawer";
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import List from "@mui/material/List";
-import Typography from "@mui/material/Typography";
-import Divider from "@mui/material/Divider";
-import IconButton from "@mui/material/IconButton";
-import Badge from "@mui/material/Badge";
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
-import Link from "@mui/material/Link";
+import React, { useState } from "react";
+import {
+  createTheme,
+  Drawer,
+  AppBar,
+  Toolbar,
+  IconButton,
+  Typography,
+  List,
+  ListItem,
+  ListItemText,
+  Box,
+  Divider,
+  Container,
+  Grid,
+  Paper
+} from "@mui/material";
 import { ChevronLeft, Menu, Notifications } from "@mui/icons-material";
+import MenuIcon from "@mui/icons-material/Menu";
+import Brightness4Icon from "@mui/icons-material/Brightness4";
+import Brightness7Icon from "@mui/icons-material/Brightness7";
+import clsx from "clsx";
 import { mainListItems, secondaryListItems } from "./listItems";
-
 import Chart from "./chart";
 import Deposits from "./deposits";
 import Orders from "./orders";
 
-import useMediaQuery from "@mui/material/useMediaQuery";
-import { ThemeProvider } from "@mui/material/styles";
-import { createMuiTheme } from "@mui/material/styles";
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright ©"} {new Date().getFullYear()}{" "}
-      <Link
-        color="inherit"
-        href="https://jaayperez.github.io/ecommerce-dashboard"
-      >
-        Dashboard
-      </Link>
-    </Typography>
-  );
-}
-
 const drawerWidth = 240;
-// const useStyles = makeStyles((theme) => ({
-const useTheme = createTheme((theme) => ({
+
+const useStyless = () => createTheme((theme) => ({
   root: {
     display: "flex",
-  },
-  toolbar: {
-    paddingRight: 24, // keep right padding when drawer closed
-  },
-  toolbarIcon: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "flex-end",
-    padding: "0 8px",
-    ...theme.mixins.toolbar,
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
@@ -78,13 +47,14 @@ const useTheme = createTheme((theme) => ({
     }),
   },
   menuButton: {
-    marginRight: 36,
-  },
-  menuButtonHidden: {
-    display: "none",
+    marginRight: theme.spacing(2),
   },
   title: {
     flexGrow: 1,
+  },
+  drawer: {
+    width: drawerWidth,
+    flexShrink: 0,
   },
   drawerPaper: {
     position: "relative",
@@ -106,90 +76,82 @@ const useTheme = createTheme((theme) => ({
       width: theme.spacing(9),
     },
   },
-  appBarSpacer: theme.mixins.toolbar,
-  content: {
-    flexGrow: 1,
-    height: "100vh",
+  drawerPaper: {
+    width: drawerWidth,
+  },
+  drawerContainer: {
     overflow: "auto",
   },
-  container: {
-    paddingTop: theme.spacing(4),
-    paddingBottom: theme.spacing(4),
-  },
-  paper: {
-    padding: theme.spacing(2),
-    display: "flex",
-    overflow: "auto",
-    flexDirection: "column",
-  },
-  fixedHeight: {
-    height: 240,
-  },
+  iconButton:{
+    positionright: 10
+  }
 }));
 
-export default function Dashboard() {
-  // const classes = useStyles();
-  const classes = useTheme;
-  const [open, setOpen] = React.useState(true);
+const getDesignTokens = (mode) => ({
+  palette: {
+    mode,
+    primary: {
+      main: mode === "light" ? "#7c21f3" : "#64b5f6", // Custom primary color for light and dark mode
+    },
+    secondary: {
+      main: mode === "light" ? "#f50057" : "#ff4081", // Custom secondary color for light and dark mode
+    },
+    background: {
+      default: mode === "light" ? "#fff" : "#121212", // Custom background color for light and dark mode
+    },
+    text: {
+      primary: mode === "light" ? "#000" : "#fff", // Custom text color for light and dark mode
+    },
+  },
+});
+
+const Dashboard = () => {
+  const classes = useStyless();
+  const [open, setOpen] = useState(false);
+  const [colorMode, setColorMode] = useState("light");
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
+
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
-  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
-  const theme = React.useMemo(
-    () =>
-      createMuiTheme({
-        palette: {
-          type: prefersDarkMode ? "dark" : "light",
-        },
-      }),
-    [prefersDarkMode]
-  );
+  const handleColorModeToggle = () => {
+    setColorMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
+  };
+
+  const sidebarItems = ["Option 1", "Option 2", "Option 3", "Option 4", "Option 5", "Option 6", "Option 7", "Option 8"];
+
+  const theme = getDesignTokens(colorMode);
+
   return (
-    <ThemeProvider theme={theme}>
-      <div className={classes.root}>
-        <CssBaseline />
+    <div className={classes.root} >
+      <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="static" className={clsx(classes.appBar, open && classes.appBarShift)}>
+        <Toolbar sx={{ backgroundColor: theme.palette.primary.main }}>
+        <IconButton
+            edge="start"
+            color="inherit"
+            className={classes.menuButton}
+            onClick={handleDrawerOpen}
+            sx={{ mr: 2 }}
+          >
+            <MenuIcon />
+          </IconButton>
+            <Typography variant="h6" className={classes.title}sx={{ flexGrow: 1 }}>
+            Dashboard Title
+          </Typography>
+          <IconButton color="inherit" onClick={handleColorModeToggle} sx={{ marginLeft: "auto" }}>
+            {colorMode === "light" ? <Brightness4Icon /> : <Brightness7Icon />}
+          </IconButton>
+        </Toolbar>
+      </AppBar>
+      </Box>
 
-        <AppBar
-          position="absolute"
-          className={clsx(classes.appBar, open && classes.appBarShift)}
-        >
-          <Toolbar className={classes.toolbar}>
-            <IconButton
-              edge="start"
-              color="inherit"
-              aria-label="open drawer"
-              onClick={handleDrawerOpen}
-              className={clsx(
-                classes.menuButton,
-                open && classes.menuButtonHidden
-              )}
-            >
-              <Menu />
-            </IconButton>
-            <Typography
-              component="h1"
-              variant="h6"
-              color="inherit"
-              noWrap
-              className={classes.title}
-            >
-              Overview
-            </Typography>
-            <IconButton color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <Notifications />
-              </Badge>
-            </IconButton>
-          </Toolbar>
-        </AppBar>
-
-        <Drawer
-          variant="permanent"
+      <Drawer
+          // variant="permanent"
           classes={{
             paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
           }}
@@ -205,31 +167,34 @@ export default function Dashboard() {
           <Divider />
           <List>{secondaryListItems}</List>
         </Drawer>
-        <main className={classes.content}>
-          <div className={classes.appBarSpacer} />
+
+      <main >
+        {/* <div style={{ padding: "20px", backgroundColor: theme.palette.primary.main }}> */}
+        <div style={{ padding: "20px"}}>
+          <Typography variant="h4">Main Content</Typography>
           <Container maxWidth="lg" className={classes.container}>
-            <Grid container spacing={3}>
+          <Grid container spacing={3}>
               {/* Recent Deposits */}
               <Deposits />
 
               {/* Chart */}
               <Grid item xs={12} md={8} lg={6}>
-                <Paper className={fixedHeightPaper}>
+                <Paper >
                   <Chart />
                 </Paper>
               </Grid>
 
-              {/* New Orders */}
               <Grid item xs={12} md={4} lg={6}>
-                <Paper className={classes.paper}>
+                <Paper >
                   <Orders />
                 </Paper>
               </Grid>
             </Grid>
           </Container>
-          <Copyright />
-        </main>
-      </div>
-    </ThemeProvider>
+        </div>
+      </main>
+    </div>
   );
-}
+};
+
+export default Dashboard;
