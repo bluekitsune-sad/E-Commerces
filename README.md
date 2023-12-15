@@ -1,6 +1,6 @@
 # Checkout the Demo
 
-https://dukan24h.kodevglobal.com/
+[Dukan24](https://dukan24h.kodevglobal.com/)
 
 # Getting Started with Create React App
 
