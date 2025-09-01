@@ -1,0 +1,16 @@
+docker commands:
+
+# -t stands for give your container a name/tag
+# . is the path to the Dockerfile
+docker build -t sample_name .
+
+# -p stands for port forwarting
+# sample_name should be the same
+docker run -p 9000:9000 sample_name
+
+# for vulnerability check run this command or check in the gui
+docker scout quickview
+
+docker compose up
+
+docker compose down
