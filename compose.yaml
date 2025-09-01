@@ -3,10 +3,22 @@
 
 services:
   backend:
+    image: exmaple/webapp
+    port:
+      - "433:8043"
+    networks:
+      - "front-tier"
+      - "back-tier"
+    configs:
+      - httpd-config
+    secrets:
+      - server-certificate
+  backend:
     # considerting we have the Dockerfile in the same dir (if not provide that location) 
     build: .
     # do port forwarting becaues that what the backedn needs to work 
-    ports: -'9000:9000'
+    ports: 
+      - '9000:9000'
   db:
     # because we are not using dockerfile for the db we will use postgres image 
     image: postgres:latest
