@@ -1,0 +1,25 @@
+# this is a example compose file 
+# this it used to run multiple container
+
+services:
+  backend:
+    # considerting we have the Dockerfile in the same dir (if not provide that location) 
+    build: .
+    # do port forwarting becaues that what the backedn needs to work 
+    ports: -'9000:9000'
+  db:
+    # because we are not using dockerfile for the db we will use postgres image 
+    image: postgres:latest
+    # postgres has some environment variable needed to run
+    environment: 
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: mydb
+    #this tells where our data is 
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+# useing volumes becuse we don't want to lose the data when we close the containers
+volumes:
+  postgres_data:
+    
